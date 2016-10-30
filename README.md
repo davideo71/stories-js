@@ -1,3 +1,8 @@
+# Stories-JS
+
+Next iteration of the stories project.
+
+
 ## Usage
 
 To set up the development environment, first install node.js. Then run `npm install` to install the required node packages.
