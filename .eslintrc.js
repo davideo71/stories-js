@@ -18,9 +18,9 @@ module.exports = {
     "eqeqeq": 1,
     "guard-for-in": 1,
     "no-alert": 1,
-    "no-eq-null": 2,
+    "no-eq-null": 1,
     "no-eval": 1,
-    "no-implicit-globals": 2,
+    "no-implicit-globals": 1,
     "no-lone-blocks": 1,
     "no-loop-func": 1,
     // "no-magic-numbers": 1,
@@ -32,12 +32,12 @@ module.exports = {
     "no-catch-shadow": 1,
     "no-shadow": [1, { "allow": ["done"] }],
     "no-unused-vars": 1,
-    "no-use-before-define": 2,
+    "no-use-before-define": 1,
 
     "handle-callback-err": [ 1, "err" ],
     "no-mixed-requires": 1,
     "no-new-require": 1,
-    "no-path-concat": 2,
+    "no-path-concat": 1,
 
 
     "array-bracket-spacing": 1,
@@ -46,7 +46,7 @@ module.exports = {
     "comma-dangle": [1, "only-multiline"],
     "comma-spacing": 1,
     "comma-style": 1,
-    "computed-property-spacing": 2,
+    "computed-property-spacing": 1,
     "consistent-this": 1,
     "eol-last": 1,
     "func-call-spacing": 1,
@@ -66,7 +66,7 @@ module.exports = {
     "no-trailing-spaces": 1,
     "no-unneeded-ternary": 1,
     "no-whitespace-before-property": 1,
-    // "object-curly-spacing": [1, "always"],  // disabled because it requires spaces in destructurings
+    "object-curly-spacing": [1, "always"],  // disabled because it requires spaces in destructurings
     "operator-linebreak": 1,
     "quotes": [1, "single"],
     // "require-jsdoc": 1,
@@ -74,6 +74,7 @@ module.exports = {
     "semi": 1,
     "space-before-blocks": 1,
     "space-before-function-paren": [1, "never"],
+    "space-in-parens": 1,
     "space-infix-ops": 1,
     "space-unary-ops": 1,
     "spaced-comment": 1,
