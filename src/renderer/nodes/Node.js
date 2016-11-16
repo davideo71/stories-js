@@ -1,101 +1,86 @@
 /* eslint-env browser */
 
-const three = require('three');
+const THREE = require('three');
 
-const SCREEN_WIDTH = window.innerWidth;
-const SCREEN_HEIGHT = window.innerHeight;
-const MAX_FPS = 30;
-let container;
-let camera, scene1, renderer;
-const nodeWidth = 80;
-const nodeHight = 60;
-const torusRadius = 5;
-// TODO: we need a way to get to the project root path
-const picPath = '../../assets/img/758px-Canestra_di_frutta_(Caravaggio).jpg';
+const RING_RADIUS = 5;
+const RING_THICKNESS = 1;
+const NODE_WIDTH = 80;
+const NODE_HEIGHT = 60;
+const FRAME_MARGIN = 0.08;
+const DEFAULT_COLOR = 0xAB2D4A;
 
-/*
-var myMaterial = new three.MeshPhysicalMaterial( {
-  color: 0xAB2D4A ,
-  metalness: 0.5 ,
-  roughness: 0.5 ,
-  clearCoat:  0.5 ,
-  clearCoatRoughness: 0.5 ,
-  reflectivity: 0.5 ,
-  envMap: null
-} );
-*/
+// so the data in this node is a 'mere' reflection of actual data in the store;
+// should a node be recreated whenever data changes? or should it be updated?
+module.exports = class Node extends THREE.Object3D {
+  constructor(id, position, size = [5, 7], published = false) {
+    super();
+    this._name;
+    this._id = id;  // each node has a unique ID for the moent that can be just an increasing counter
+    this._position = position;
+    this._size = size;  // the size is useful because the aspect ratio is not always the same, but this can potentially be directly retrieved from the image it is linked to
+    this._imageId;
+    this._dimensionsFull;
+    this._dimensionsAspect;
+    this._uploadStatus;
+    this._published = published;  // this bool indicates wether the image is currently selected and on display online
+    this._editingInfo;
+    this._notes;
+    this._colorTest = DEFAULT_COLOR;
+    // FIXME: we need a good way to get the project root path
+    this._imagePath = '../../assets/img/758px-Canestra_di_frutta_(Caravaggio).jpg';
 
-// const myMaterial = new three.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, shininess: 30, shading: three.FlatShading, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 5 } );
-const myMaterial = new three.MeshBasicMaterial({ color: 0xffffff, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 5 });
+    this._setupModel();
+  }
 
+  get id() { return this._id; }
+  get size() { return this._size; }
+  get published() { return this._published; }
+  get imagePath() { return this._imgPath; }
+  get color() { return this._colortest; }
 
-function init() {
-  container = document.getElementById('canvasContainer');
-  camera = new three.PerspectiveCamera(70, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 5000);
-  camera.position.z = 70;
+  _ringMesh() {
+    const geometry = new THREE.RingBufferGeometry(RING_RADIUS, RING_RADIUS + RING_THICKNESS, 32);  // save something here with less segments
+    const material = new THREE.MeshBasicMaterial({ color: 0xAB2D4A });
+    const ring = new THREE.Mesh(geometry, material);
+    ring.position.x = NODE_WIDTH * 0.5 + RING_RADIUS * 2;
+    ring.position.y = 0;
+    ring.position.z = 0;
 
-  scene1 = new three.Scene();
+    return ring;
+  }
 
-  // PAINTING
-  const callbackPicture = function() {
-    // var image = texturePicture1.image;
-    const geometry = new three.PlaneBufferGeometry(nodeWidth, nodeHight);
-    const mesh1 = new three.Mesh(geometry, materialPicture1);
+  // _planeMesh() {
+  //   const geometry = new THREE.PlaneBufferGeometry(NODE_WIDTH, NODE_HEIGHT);
+  //   const material = new THREE.MeshBasicMaterial({ color: 0xDCF4DF });
+  //   const plane = new THREE.Mesh(geometry, material);
+  //
+  //   return plane;
+  // }
 
-    function addPicture(zscene, zmesh) {
-      zscene.add(zmesh);
-    // var meshFrame = new three.Mesh( geometry, new three.MeshBasicMaterial( { color: 0xffffff, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 5 } ) );
-      const meshFrame = new three.Mesh(geometry, myMaterial);
-      meshFrame.scale.x = 1.08 * meshFrame.scale.x;
-      meshFrame.scale.y = 1.08 * meshFrame.scale.y;
-      zscene.add(meshFrame);
-    }
+  _setupModel() {
+    console.log(`this._size: ${this._size}`);
+    // const [w, h] = this._size;
+    const w = this._size[0];
+    const h = this._size[1];
+    const texture = new THREE.TextureLoader().load(this._imagePath, (tex) => {
+      // FIXME: just here to observe loading/rendering order, should fire an event or something along those lines
+      console.log('texture loaded');
+    });
 
-    function addStuff(aScene) {
-      const geometry2 = new three.TorusBufferGeometry(torusRadius, 0.5, 2, 50);
-      const material2 = new three.MeshBasicMaterial({ color: 0xAB2D4A });
-      const torus = new three.Mesh(geometry2, material2);
-      torus.position.x = +(nodeWidth * 0.5) + (torusRadius * 2);
-      torus.position.y = 0;
-      aScene.add(torus);
+    const geometry = new THREE.PlaneBufferGeometry(w, h);
+    const geometry2 = new THREE.PlaneBufferGeometry(w * 1.08, h * 1.08);
 
-    }
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture });
+    const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-    addPicture(scene1, mesh1);
-    addStuff(scene1);
-  };
+    const plane = new THREE.Mesh(geometry, material);
+    const plane2 = new THREE.Mesh(geometry2, material2);
+    plane.position.z = +0.01;
 
-  const texturePicture1 = new three.TextureLoader().load(picPath, callbackPicture); // second parameter is what it does onload
-  const materialPicture1 = new three.MeshBasicMaterial({ color: 0xffffff, map: texturePicture1 });
-  texturePicture1.minFilter = texturePicture1.magFilter = three.LinearFilter;// dit maakt het een stuk scherper
-  texturePicture1.mapping = three.UVMapping;
+    this.add(plane);
+    this.add(plane2);
 
-  renderer = new three.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-  renderer.autoClear = false;
-  renderer.domElement.style.position = 'relative';
-  container.appendChild(renderer.domElement);
-
-}
-
-// function onDocumentMouseMove( event ) {
-//	mouseX = ( event.clientX - windowHalfX );
-//	mouseY = ( event.clientY - windowHalfY );
-//	}
-
-function render() {
-  camera.lookAt(scene1.position);
-  renderer.clear();
-  renderer.render(scene1, camera);
-}
-
-function animate() {
-  setTimeout(() => {
-    requestAnimationFrame(animate);
-  }, 1000 / MAX_FPS);
-  render();
-}
-
-init();
-animate();
+    this.add(this._ringMesh());
+    // render();  // for some reason, with this render, the image stays dark
+  }
+};

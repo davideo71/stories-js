@@ -1,6 +1,6 @@
 'use strict';
 
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow} = require('electron'); /* eslint object-curly-spacing: 0 */
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
@@ -9,7 +9,7 @@ const OSX_QUIT_ON_WINDOW_CLOSE = true;
 // keep a global reference of the window object, otherwise it will be closed as soon as the gc cleans it
 let mainWindow;
 
-function createWindow() {
+const createWindow = () => {
   mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
   mainWindow.loadURL(`file://${__dirname}/html/index.html`);
 
