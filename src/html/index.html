@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" href="../css/styles.css">
   </head>
   <body>
     <!--<h1>Hello World!</h1>
@@ -11,10 +12,10 @@
     and Electron <script>document.write(process.versions.electron)</script>.
     <br>
     <small>This example is based on <a href="http://electron.atom.io/docs/tutorial/quick-start/">http://electron.atom.io/docs/tutorial/quick-start/</a>.</small>-->
+    <div id="canvasContainer"></div>
   </body>
 
   <script>
-    // You can also require other files to run in this process
-    require('../renderer/renderer.js')
+    require('../renderer/renderer.js');
   </script>
 </html>

@@ -91,8 +91,7 @@ function onDocumentMouseUp(event) {
 
 
 function init() {
-  container = document.createElement('div');
-  document.body.appendChild(container);
+  container = document.getElementById('canvasContainer');
 
   camera = new three.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.z = 1000;
