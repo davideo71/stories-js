@@ -1,6 +1,7 @@
 'use strict';
 
 const {app, BrowserWindow} = require('electron'); /* eslint object-curly-spacing: 0 */
+const store = require('./reducers/index.js');
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
@@ -10,8 +11,21 @@ const OSX_QUIT_ON_WINDOW_CLOSE = true;
 let mainWindow;
 
 const createWindow = () => {
+
+
+
+  // ===== TEST redux store
+  store.subscribe(() => {
+    console.log(`store changed: ${JSON.stringify(store.getState())}`);
+  });
+  store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0xFFFF00 });
+  store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0x00FF00 });
+  // ===== /TEST
+
+
+
   mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
-  mainWindow.loadURL(`file://${__dirname}/html/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
 
   // mainWindow.webContents.openDevTools();  // open the devtools
 
@@ -19,7 +33,7 @@ const createWindow = () => {
     // dereference the window object so it can be cleaned by gc
     mainWindow = null;
   });
-}
+};
 
 // Called when electron is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -40,6 +54,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
