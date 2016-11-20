@@ -1,8 +1,10 @@
+const defaults = require('../defaults');
+
 const initialState = {
-  backgroundColor: 0x27272D
+  backgroundColor: defaults.CANVAS.BACKGROUND_COLOR
 };
 
-module.exports = (state = initialState, action) => {
+const canvasReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'SET_BACKGROUND_COLOR':
     return Object.assign({}, state, { backgroundColor: action.payload });
@@ -10,3 +12,5 @@ module.exports = (state = initialState, action) => {
 
   return state;
 };
+
+module.exports = canvasReducer;

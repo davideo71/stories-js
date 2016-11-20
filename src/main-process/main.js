@@ -16,10 +16,17 @@ const createWindow = () => {
 
   // ===== TEST redux store
   store.subscribe(() => {
-    console.log(`store changed: ${JSON.stringify(store.getState())}`);
+    console.log(`>>> store changed: ${JSON.stringify(store.getState())}`);
   });
   store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0xFFFF00 });
   store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0x00FF00 });
+
+  let nodeIdCounter = 0;
+  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'ONE', id: nodeIdCounter++ } });
+  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'TWO', id: nodeIdCounter++ } });
+  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'THREE', id: nodeIdCounter++ } });
+  store.dispatch({ type: 'NODE_DELETE', payload: 1 });
+  store.dispatch({ type: 'NODE_UPDATE', payload: { id: 0, size: [100, 100] } });
   // ===== /TEST
 
 
