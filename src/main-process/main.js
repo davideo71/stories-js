@@ -1,7 +1,7 @@
 'use strict';
 
 const {app, BrowserWindow} = require('electron'); /* eslint object-curly-spacing: 0 */
-const store = require('./reducers/index.js');
+const { store, actions } = require('./reducers/index.js');
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
@@ -15,18 +15,22 @@ const createWindow = () => {
 
 
   // ===== TEST redux store
-  store.subscribe(() => {
+  const unsubscribe = store.subscribe(() => {
     console.log(`>>> store changed: ${JSON.stringify(store.getState())}`);
   });
-  store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0xFFFF00 });
-  store.dispatch({ type: 'SET_BACKGROUND_COLOR', payload: 0x00FF00 });
 
+  store.dispatch(actions.setBackgroundColor(0xFFFF00));
+  store.dispatch(actions.setBackgroundColor(0x00FF00));
+
+  // TODO: move this counter into action creator (and store it for persistence)? Use redux-thunk / redux-saga here?
   let nodeIdCounter = 0;
-  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'ONE', id: nodeIdCounter++ } });
-  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'TWO', id: nodeIdCounter++ } });
-  store.dispatch({ type: 'NODE_CREATE', payload: { name: 'THREE', id: nodeIdCounter++ } });
-  store.dispatch({ type: 'NODE_DELETE', payload: 1 });
-  store.dispatch({ type: 'NODE_UPDATE', payload: { id: 0, size: [100, 100] } });
+  store.dispatch(actions.createNode({ name: 'ONE', id: nodeIdCounter++ }));
+  store.dispatch(actions.createNode({ name: 'TWO', id: nodeIdCounter++ }));
+  store.dispatch(actions.createNode({ name: 'THREE', id: nodeIdCounter++ }));
+  store.dispatch(actions.deleteNode(1));
+  store.dispatch(actions.updateNode(0, { size: [100, 100] }));
+
+  unsubscribe();
   // ===== /TEST
 
 

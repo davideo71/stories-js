@@ -2,9 +2,12 @@ const { combineReducers, createStore } = require('redux');
 const canvasReducer = require('./canvasReducer.js');
 const nodesReducer = require('./nodesReducer.js');
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   canvas: canvasReducer,
   nodes: nodesReducer
 });
 
-module.exports = createStore(reducers);
+module.exports = {
+  store: createStore(rootReducer),
+  actions: require('./actions.js')
+};

@@ -1,6 +1,5 @@
 /*
  * based on http://redux.js.org/docs/basics/ExampleTodoList.html
- * TODO: document somewhere what payload is expexted for each action
  */
 const defaults = require('../defaults');
 
