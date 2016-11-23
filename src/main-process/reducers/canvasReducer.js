@@ -1,4 +1,5 @@
 const defaults = require('../defaults');
+const { actionTypes } = require('./actions.js');
 
 const initialState = {
   backgroundColor: defaults.CANVAS.BACKGROUND_COLOR
@@ -6,7 +7,7 @@ const initialState = {
 
 const canvasReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'SET_BACKGROUND_COLOR':
+  case actionTypes.SET_BACKGROUND_COLOR:
     return Object.assign({}, state, { backgroundColor: action.payload });
   }
 

@@ -7,7 +7,9 @@ const rootReducer = combineReducers({
   nodes: nodesReducer
 });
 
+const { actionTypes, actions } = require('./actions.js');
 module.exports = {
   store: createStore(rootReducer),
-  actions: require('./actions.js')
+  actionTypes,
+  actions
 };

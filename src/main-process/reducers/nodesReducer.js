@@ -2,6 +2,7 @@
  * based on http://redux.js.org/docs/basics/ExampleTodoList.html
  */
 const defaults = require('../defaults');
+const { actionTypes } = require('./actions.js');
 
 const initialNodeState = {
   name: '',
@@ -23,9 +24,9 @@ const initialNodesState = [];  // an array here might be fine, as they are hash 
 // performs operations for one node, only used internally by nodesReducer
 const nodeReducer = (state = {}, action) => {
   switch (action.type) {
-  case 'NODE_CREATE':
+  case actionTypes.NODE_CREATE:
     return Object.assign({}, initialNodeState, action.payload);
-  case 'NODE_UPDATE':
+  case actionTypes.NODE_UPDATE:
     if (state.id === action.payload.id) {
       return Object.assign({}, state, action.payload);
     } else {
@@ -39,11 +40,11 @@ const nodeReducer = (state = {}, action) => {
 // manages the list of nodes
 const nodesReducer = (state = initialNodesState, action) => {
   switch (action.type) {
-  case 'NODE_CREATE':
+  case actionTypes.NODE_CREATE:
     return [...state, nodeReducer(undefined, action)];
-  case 'NODE_UPDATE':
+  case actionTypes.NODE_UPDATE:
     return state.map((n) => nodeReducer(n, action));
-  case 'NODE_DELETE':
+  case actionTypes.NODE_DELETE:
     return [
       ...state.slice(0, action.payload),
       ...state.slice(action.payload + 1)
