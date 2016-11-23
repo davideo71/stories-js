@@ -1,6 +1,7 @@
 'use strict';
 
 const {app, BrowserWindow} = require('electron'); /* eslint object-curly-spacing: 0 */
+const config = require('../config.js');
 const { store, actions } = require('./reducers/index.js');
 
 const WIN_WIDTH = 800;
@@ -9,6 +10,9 @@ const OSX_QUIT_ON_WINDOW_CLOSE = true;
 
 // keep a global reference of the window object, otherwise it will be closed as soon as the gc cleans it
 let mainWindow;
+
+
+console.info(`***** Stories (env mode: ${config.environment}) *****`);
 
 const createWindow = () => {
 
