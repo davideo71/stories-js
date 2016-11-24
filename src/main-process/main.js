@@ -1,8 +1,8 @@
 'use strict';
 
-const {app, BrowserWindow} = require('electron'); /* eslint object-curly-spacing: 0 */
+const { app, BrowserWindow } = require('electron');
 const config = require('../config.js');
-const { store, actions } = require('./reducers/index.js');
+const { store, actions } = require('../reducers/index.js');
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
@@ -15,12 +15,21 @@ let mainWindow;
 console.info(`***** Stories (env mode: ${config.environment}) *****`);
 
 const createWindow = () => {
+  mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
+  mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
+
+  // mainWindow.webContents.openDevTools();  // open the devtools
+
+  mainWindow.on('closed', () => {
+    // dereference the window object so it can be cleaned by gc
+    mainWindow = null;
+  });
 
 
 
   // ===== TEST redux store
   const unsubscribe = store.subscribe(() => {
-    console.log(`>>> store changed: ${JSON.stringify(store.getState())}`);
+    console.log(`>>>M store changed: ${JSON.stringify(store.getState())}`);
   });
 
   store.dispatch(actions.setBackgroundColor(0xFFFF00));
@@ -34,20 +43,13 @@ const createWindow = () => {
   store.dispatch(actions.deleteNode(1));
   store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 
+  store.dispatch(actions.setBackgroundColor(9876543210));
+
   unsubscribe();
   // ===== /TEST
 
 
 
-  mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
-  mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
-
-  // mainWindow.webContents.openDevTools();  // open the devtools
-
-  mainWindow.on('closed', () => {
-    // dereference the window object so it can be cleaned by gc
-    mainWindow = null;
-  });
 };
 
 // Called when electron is ready to create browser windows.
