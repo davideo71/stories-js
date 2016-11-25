@@ -7,7 +7,7 @@ const mapObject = (obj, f) => {
 };
 
 const updateObject = (obj, ...merge) => {
-  return Object.assign({}, obj, merge);
+  return Object.assign({}, obj, ...merge);
 };
 
 module.exports = {
