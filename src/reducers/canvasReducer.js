@@ -1,5 +1,5 @@
 const defaults = require('../defaults');
-const { actionTypes } = require('./actions.js');
+const { actionTypes } = require('./actions');
 
 const initialState = {
   backgroundColor: defaults.CANVAS.BACKGROUND_COLOR

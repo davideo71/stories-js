@@ -1,9 +1,9 @@
 const { applyMiddleware, combineReducers, compose, createStore } = require('redux');
 const { electronEnhancer } = require('redux-electron-store');
 const isRenderer = require('is-electron-renderer');
-const config = require('../config.js');
-const canvasReducer = require('./canvasReducer.js');
-const nodesReducer = require('./nodesReducer.js');
+const config = require('../config');
+const canvasReducer = require('./canvasReducer');
+const nodesReducer = require('./nodesReducer');
 
 const rootReducer = combineReducers({
   canvas: canvasReducer,
@@ -30,7 +30,7 @@ const enhancer = compose(
 
 const store = createStore(rootReducer, enhancer);
 
-const { actionTypes, actions } = require('./actions.js');
+const { actionTypes, actions } = require('./actions');
 module.exports = {
   store, actionTypes, actions
 };

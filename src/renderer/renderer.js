@@ -5,8 +5,8 @@
 // let xyz = require('css!normalize.css');
 // let xyz = require('css!desktop-normalize');
 const THREE = require('three');
-const Node = require('./nodes/Node.js');
-const { store, actions } = require('../reducers/index.js');
+const Node = require('./nodes/Node');
+const { store, actions } = require('../reducers/index');
 
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;

@@ -1,8 +1,8 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
-const config = require('../config.js');
-const { store, actions } = require('../reducers/index.js');
+const config = require('../config');
+const { store, actions } = require('../reducers/index');
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
