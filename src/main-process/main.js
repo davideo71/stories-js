@@ -32,18 +32,20 @@ const createWindow = () => {
     console.log(`>>>M store changed: ${JSON.stringify(store.getState())}`);
   });
 
-  store.dispatch(actions.setBackgroundColor(0xFFFF00));
-  store.dispatch(actions.setBackgroundColor(0x00FF00));
+  // delay these dispatches a bit, so the renderer can catch them too
+  setTimeout(() => {
+    store.dispatch(actions.setBackgroundColor(0xFFFF00));
+    store.dispatch(actions.setBackgroundColor(0x00FF00));
 
-  // TODO: move this counter into action creator (and store it for persistence)? Use redux-thunk / redux-saga here?
-  let nodeIdCounter = 0;
-  store.dispatch(actions.createNode({ name: 'ONE', id: nodeIdCounter++ }));
-  store.dispatch(actions.createNode({ name: 'TWO', id: nodeIdCounter++ }));
-  store.dispatch(actions.createNode({ name: 'THREE', id: nodeIdCounter++ }));
-  store.dispatch(actions.deleteNode(1));
-  store.dispatch(actions.updateNode(0, { size: [100, 100] }));
+    let nodeIdCounter = 0;  // TODO: this should be part of the `nodes` store slice and used/updated in `nodesReducer.js`
+    store.dispatch(actions.createNode({ name: 'ONE', id: nodeIdCounter++ }));
+    store.dispatch(actions.createNode({ name: 'TWO', id: nodeIdCounter++ }));
+    store.dispatch(actions.createNode({ name: 'THREE', id: nodeIdCounter++ }));
+    store.dispatch(actions.deleteNode(1));
+    store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 
-  store.dispatch(actions.setBackgroundColor(9876543210));
+    store.dispatch(actions.setBackgroundColor(9876543210));
+  }, 1000);
 
   unsubscribe();
   // ===== /TEST

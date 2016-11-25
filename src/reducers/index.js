@@ -14,7 +14,10 @@ const middleware = [];
 
 if (config.environment !== 'production') {
   middleware.push(require('redux-immutable-state-invariant')());
-  if (isRenderer) middleware.push(require('redux-logger')());
+  if (isRenderer) middleware.push(require('redux-logger')({
+    diff: true,
+    collapsed: true
+  }));
 }
 
 // NOTE: electronEnhancer must be placed after any middleware/enhancers dispatching actions themselves
