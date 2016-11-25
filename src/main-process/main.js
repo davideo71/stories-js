@@ -37,10 +37,15 @@ const createWindow = () => {
     store.dispatch(actions.setBackgroundColor(0xFFFF00));
     store.dispatch(actions.setBackgroundColor(0x00FF00));
 
-    let nodeIdCounter = 0;  // TODO: this should be part of the `nodes` store slice and used/updated in `nodesReducer.js`
-    store.dispatch(actions.createNode({ name: 'ONE', id: nodeIdCounter++ }));
-    store.dispatch(actions.createNode({ name: 'TWO', id: nodeIdCounter++ }));
-    store.dispatch(actions.createNode({ name: 'THREE', id: nodeIdCounter++ }));
+    store.dispatch(actions.createNode({ name: 'ONE', id: store.getState().nodes.nextId }));
+    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
+
+    store.dispatch(actions.createNode({ name: 'TWO', id: store.getState().nodes.nextId }));
+    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
+
+    store.dispatch(actions.createNode({ name: 'THREE', id: store.getState().nodes.nextId }));
+    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
+
     store.dispatch(actions.deleteNode(1));
     store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 

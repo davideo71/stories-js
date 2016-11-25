@@ -59,6 +59,10 @@ const nodesReducerHandlers = {
     return updateObject(state, {
       items: mapObject(state.items, (i) => nodeReducer(i, action))
     });
+  },
+
+  [actionTypes.NODE_SET_NEXT_ID]: (state, action) => {
+    return updateObject(state, { nextId: action.payload });
   }
 };
 

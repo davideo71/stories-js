@@ -2,7 +2,8 @@ const actionTypes = {
   SET_BACKGROUND_COLOR: 'SET_BACKGROUND_COLOR',
   NODE_CREATE: 'NODE_CREATE',
   NODE_DELETE: 'NODE_DELETE',
-  NODE_UPDATE: 'NODE_UPDATE'
+  NODE_UPDATE: 'NODE_UPDATE',
+  NODE_SET_NEXT_ID: 'NODE_SET_NEXT_ID'
 };
 
 const actions = {
@@ -17,6 +18,9 @@ const actions = {
   },
   updateNode: (id, props) => {
     return { type: actionTypes.NODE_UPDATE, payload: Object.assign({}, { id }, props) };
+  },
+  setNextNodeId: (nextId) => {
+    return { type: actionTypes.NODE_SET_NEXT_ID, payload: nextId };
   }
 };
 
