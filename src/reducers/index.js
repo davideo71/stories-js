@@ -1,5 +1,6 @@
 const { applyMiddleware, combineReducers, compose, createStore } = require('redux');
 const { electronEnhancer } = require('redux-electron-store');
+const thunk = require('redux-thunk').default;
 const isRenderer = require('is-electron-renderer');
 const config = require('../config');
 const canvasReducer = require('./canvasReducer');
@@ -10,7 +11,7 @@ const rootReducer = combineReducers({
   nodes: nodesReducer
 });
 
-const middleware = [];
+const middleware = [thunk];
 
 if (config.environment !== 'production') {
   middleware.push(require('redux-immutable-state-invariant')());

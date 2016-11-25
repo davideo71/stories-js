@@ -36,16 +36,9 @@ const createWindow = () => {
   setTimeout(() => {
     store.dispatch(actions.setBackgroundColor(0xFFFF00));
     store.dispatch(actions.setBackgroundColor(0x00FF00));
-
-    store.dispatch(actions.createNode({ name: 'ONE', id: store.getState().nodes.nextId }));
-    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
-
-    store.dispatch(actions.createNode({ name: 'TWO', id: store.getState().nodes.nextId }));
-    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
-
-    store.dispatch(actions.createNode({ name: 'THREE', id: store.getState().nodes.nextId }));
-    store.dispatch(actions.setNextNodeId(store.getState().nodes.nextId + 1));
-
+    store.dispatch(actions.createNode({ name: 'ONE' }));
+    store.dispatch(actions.createNode({ name: 'TWO' }));
+    store.dispatch(actions.createNode({ name: 'THREE' }));
     store.dispatch(actions.deleteNode(1));
     store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 
