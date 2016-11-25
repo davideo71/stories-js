@@ -8,18 +8,6 @@ const THREE = require('three');
 const Node = require('./nodes/Node.js');
 const { store, actions } = require('../reducers/index.js');
 
-
-
-// ===== TEST redux store
-const unsubscribe = store.subscribe(() => {  // this misses the dispatches from main
-  console.log(`>>>R store changed: ${JSON.stringify(store.getState())}`);
-});
-store.dispatch(actions.setBackgroundColor(123456789));
-unsubscribe();
-// ===== /TEST
-
-
-
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
 
@@ -56,9 +44,17 @@ const render = () => {
 };
 
 const initHandlers = () => {
+  const unsubscribe = store.subscribe(() => {
+    // update components from here
+  });
+
   window.addEventListener('click', () => {
     render();
   }, false);
+
+  window.onunload = () => {
+    unsubscribe();
+  };
 };
 
 // const animate = () => {
