@@ -18,7 +18,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
   mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
 
-  // mainWindow.webContents.openDevTools();  // open the devtools
+  mainWindow.webContents.openDevTools();  // open the devtools
 
   mainWindow.on('closed', () => {
     // dereference the window object so it can be cleaned by gc
