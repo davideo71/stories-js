@@ -10,6 +10,8 @@
   </body>
 
   <script>
+    // NOTE: use require/import instead of a plain script tag in order to get a proper base
+    // path for require()ing in renderer.js (and also keeping the global scope clean).
     require('../renderer/renderer');
   </script>
 </html>

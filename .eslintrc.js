@@ -9,6 +9,10 @@ module.exports = {
     "node": true,
     "es6": true
   },
+  "plugins": [
+  	"react"
+  ],
+  "parser": "babel-eslint",
   "rules": {
     "no-console": 0,
 

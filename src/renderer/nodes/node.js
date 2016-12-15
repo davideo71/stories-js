@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 const THREE = require('three');
 
 const RING_RADIUS = 5;
