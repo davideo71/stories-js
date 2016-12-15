@@ -1,0 +1,72 @@
+const React = require('react');
+const { PropTypes } = React;
+
+const THREE = require('three');
+const { Vector3 } = THREE;
+
+const React3 = require('react-three-renderer');
+
+
+const PLANE_WIDTH = 100;
+const PLANE_HEIGHT = 100;
+
+module.exports = class World extends React.Component {
+  static propTypes = {
+    backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired,
+
+    // onMouseDown: PropTypes.func,
+    // onMouseUp: PropTypes.func
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    // this._geometry = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
+    // this._position = new THREE.Vector3(0, 0, 0);
+  }
+
+  render() {
+    const { backgroundColor } = this.props;
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    return (<div ref="container">
+      {/* <h1>test-dom-element</h1> */}
+      <React3
+        width={width}
+        height={height}
+        antialias
+        pixelRatio={window.devicePixelRatio}
+        mainCamera="mainCamera"
+        clearColor={backgroundColor}
+      >
+        <scene ref="world">
+          <perspectiveCamera
+            fov={70}
+            aspect={width / height}
+            near={1}
+            far={5000}
+            name="mainCamera"
+            position={new Vector3(0, 0, 70)}
+            lookAt={new Vector3(0, 0, 0)}
+          />
+          {/* add ambient light? */}
+          {/* add canvas (which contains all nodes+lines and manages their life cycles) */}
+
+          {/* for now, let's just add a temporary box */}
+          <mesh>
+            <boxGeometry
+              width={40}
+              height={40}
+              depth={40}
+            />
+            <meshBasicMaterial
+              color={0x00ff00}
+            />
+          </mesh>
+        </scene>
+      </React3>
+    </div>);
+  }
+};

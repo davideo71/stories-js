@@ -43,7 +43,7 @@ const createWindow = () => {
     store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 
     store.dispatch(actions.setBackgroundColor(9876543210));
-  }, 1000);
+  }, 3000);
 
   unsubscribe();
   // ===== /TEST

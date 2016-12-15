@@ -67,7 +67,7 @@ const initHandlers = () => {
 
 /** ********* ENTRY POINT ***********/
 const React = require('react');
-const Canvas = require('./canvas');
+const World = require('./world');
 
 // setupScene();
 // initHandlers();
@@ -80,7 +80,17 @@ const Canvas = require('./canvas');
 // render();
 // animate();
 
+const mouseDownCB = (ev) => {
+  console.info(ev);
+
+  const color1 = 0xFF00FF;
+  const color2 = 0x00FF00;
+  const newColor = store.getState().canvas.backgroundColor === color1 ? color2 : color1;
+  store.dispatch(actions.setBackgroundColor(newColor));
+};
+document.addEventListener('mousedown', mouseDownCB);
+
 ReactDOM.render(
-  <Canvas backgroundColor={new THREE.Color('rgb(127, 255, 63)')} />,
+  <World backgroundColor={new THREE.Color('rgb(127, 255, 63)')} />,
   document.getElementById('canvasContainer')
 );
