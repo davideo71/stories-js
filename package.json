@@ -5,8 +5,8 @@
   "repository": "http://github.com/davideo71/stories-js",
   "main": "src/main-process/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "test": "electron-mocha"
   },
   "engines": {
     "node": "^5.12.0",
@@ -30,6 +30,8 @@
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-preset-electron": "^0.37.8",
     "babel-preset-react": "^6.16.0",
+    "chai": "^3.5.0",
+    "electron-mocha": "^3.2.1",
     "electron-prebuilt-compile": "^1.4.11",
     "eslint": "^3.4",
     "eslint-plugin-react": "^6.8.0",
