@@ -5,12 +5,13 @@ const THREE = require('three');
 const { Vector3 } = THREE;
 
 const React3 = require('react-three-renderer');
+const { connect } = require('react-redux');
 
 
 const PLANE_WIDTH = 100;
 const PLANE_HEIGHT = 100;
 
-module.exports = class World extends React.Component {
+class World extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired,
 
@@ -32,7 +33,6 @@ module.exports = class World extends React.Component {
     const height = window.innerHeight;
 
     return (<div ref="container">
-      {/* <h1>test-dom-element</h1> */}
       <React3
         width={width}
         height={height}
@@ -69,4 +69,12 @@ module.exports = class World extends React.Component {
       </React3>
     </div>);
   }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    'backgroundColor': new THREE.Color(state.canvas.backgroundColor)
+  };
 };
+
+module.exports = connect(mapStateToProps)(World);

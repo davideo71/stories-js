@@ -67,6 +67,7 @@ const initHandlers = () => {
 
 /** ********* ENTRY POINT ***********/
 const React = require('react');
+const { Provider } = require('react-redux');
 const World = require('./world');
 
 // setupScene();
@@ -91,6 +92,8 @@ const mouseDownCB = (ev) => {
 document.addEventListener('mousedown', mouseDownCB);
 
 ReactDOM.render(
-  <World backgroundColor={new THREE.Color('rgb(127, 255, 63)')} />,
+  <Provider store={store}>
+    <World backgroundColor={new THREE.Color('rgb(127, 255, 63)')} />
+  </Provider>,
   document.getElementById('canvasContainer')
 );
