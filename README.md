@@ -15,7 +15,10 @@ Then to start the application, run `npm start`. Later on we can use [Electron-pa
 To keep code consistent, it is helpful to make use of the EditorConfig file and ESLint (corresponding VSCode packages: 'EditorConfig for VS Code', 'ESLint').
 To use the debugger in VS Code and run the app from within VS Code, install the extension 'Debugger for Chrome' and launch the app from the debugger view. For ease of use, assign keyboard bindings to actions under `workbench.action.debug.*`, e.g. `cmd-r` and `cmd-.` to mimic XCode. See <http://electron.rocks/debugging-electron-in-vs-code-revised> for more information. Note that on Windows, the electron binary mentioned in `.vscode/launch.json` is actually called `electron.cmd`.
 
+For debugging, set NODE_ENV (e.g. `NODE_ENV=development npm start`) and/or use the debug module (e.g. `DEBUG=*,-babel npm start`).
+
+### Style guides and standards
+
 A style guide which seems very sensible (for the most part at least): https://github.com/elierotenberg/coding-styles/blob/master/es6.md.
 And another on react/jsx: https://github.com/airbnb/javascript/tree/master/react.
-
-For debugging, set NODE_ENV (e.g. `NODE_ENV=development npm start`) and/or use the debug module (e.g. `DEBUG=*,-babel npm start`).
+And information on how to structure redux actions: https://github.com/acdlite/flux-standard-action.
