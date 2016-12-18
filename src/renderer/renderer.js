@@ -1,29 +1,8 @@
-const ReactDOM = require('react-dom');
-
-const THREE = require('three');
-const { store, actions } = require('../reducers/index');
-
-// const animate = () => {
-//   const MAX_FPS = 30;
-//   setTimeout(() => {
-//     requestAnimationFrame(animate);
-//   }, 1000 / MAX_FPS);
-//   render();
-// }
-
-
-/** ********* ENTRY POINT ***********/
 const React = require('react');
+const ReactDOM = require('react-dom');
 const { Provider } = require('react-redux');
-const World = require('./world');
-
-// Canvas should take care of nodes management with R3
-// const Node = require('./nodes/node');
-// const node = new Node(53, [0, 0, 0], [80, 60], true);
-// scene.add(node);
-
-// render();
-// animate();
+const { store, actions } = require('../reducers/index');
+const World = require('./containers/world');
 
 const mouseDownCB = (ev) => {
   console.info(ev);
@@ -37,7 +16,7 @@ document.addEventListener('mousedown', mouseDownCB);
 
 ReactDOM.render(
   <Provider store={store}>
-    <World backgroundColor={new THREE.Color('rgb(127, 255, 63)')} />
+    <World />
   </Provider>,
   document.getElementById('canvasContainer')
 );

@@ -27,6 +27,8 @@ class World extends React.Component {
   }
 
   render() {
+    // NOTE: since this is a container (smart component), it gets its properties from the redux store, not from a parent;
+    // this also means defaults are provided through the store (ultimately defaults.js) instead of defaultProps.
     const { backgroundColor } = this.props;
 
     const width = window.innerWidth;
@@ -71,7 +73,7 @@ class World extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     'backgroundColor': new THREE.Color(state.canvas.backgroundColor)
   };
