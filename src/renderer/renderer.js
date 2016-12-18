@@ -1,8 +1,15 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const { Provider } = require('react-redux');
+
+const rootRequire = require('app-root-path').require;
+const config = rootRequire('/config');
+const version = rootRequire('/package.json').version;
+
 const { store, actions } = require('../reducers/index');
 const World = require('./containers/world');
+
+console.info(`***** Stories ${version} (env mode: ${config.environment}) *****`);
 
 const mouseDownCB = (ev) => {
   console.info(ev);

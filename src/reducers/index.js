@@ -2,7 +2,7 @@ const { applyMiddleware, combineReducers, compose, createStore } = require('redu
 const { electronEnhancer } = require('redux-electron-store');
 const thunk = require('redux-thunk').default;
 const isRenderer = require('is-electron-renderer');
-const config = require('../config');
+const config = require('app-root-path').require('/config');
 const canvasReducer = require('./canvasReducer');
 const nodesReducer = require('./nodesReducer');
 

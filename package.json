@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-	"lint": "eslint src"
+    "lint": "eslint src"
   },
   "engines": {
     "node": "^5.12.0",
@@ -16,6 +16,7 @@
   "author": "",
   "license": "TODO: http://choosealicense.com/about",
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "is-electron-renderer": "^2.0.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",

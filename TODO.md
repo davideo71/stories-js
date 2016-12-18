@@ -1,6 +1,5 @@
 ## TODO
 
-- log application version on start (using https://www.npmjs.com/package/pkginfo?)
 - unit testing
 - add persistence
   * clean up state before persisting: http://www.mattgreer.org/articles/electron-redux-and-persistence

@@ -1,7 +1,11 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
-const config = require('../config');
+
+const rootRequire = require('app-root-path').require;
+const config = rootRequire('/config');
+const version = rootRequire('/package.json').version;
+
 const { store, actions } = require('../reducers/index');
 
 const WIN_WIDTH = 800;
@@ -11,8 +15,6 @@ const OSX_QUIT_ON_WINDOW_CLOSE = true;
 // keep a global reference of the window object, otherwise it will be closed as soon as the gc cleans it
 let mainWindow;
 
-
-console.info(`***** Stories (env mode: ${config.environment}) *****`);
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });
@@ -47,6 +49,9 @@ const createWindow = () => {
 
 
 };
+
+
+console.info(`***** Stories ${version} (env mode: ${config.environment}) *****`);
 
 // Called when electron is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
