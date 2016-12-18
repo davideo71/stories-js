@@ -4,9 +4,8 @@ const { app, BrowserWindow } = require('electron');
 
 const rootRequire = require('app-root-path').require;
 const config = rootRequire('/config');
-const version = rootRequire('/package.json').version;
-
-const { store, actions } = require('../reducers/index');
+const { version } = rootRequire('/package.json');
+const { store, actions } = require('../reducers/');
 
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 600;
@@ -14,7 +13,6 @@ const OSX_QUIT_ON_WINDOW_CLOSE = true;
 
 // keep a global reference of the window object, otherwise it will be closed as soon as the gc cleans it
 let mainWindow;
-
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({ width: WIN_WIDTH, height: WIN_HEIGHT });

@@ -4,8 +4,7 @@ const { Provider } = require('react-redux');
 
 const rootRequire = require('app-root-path').require;
 const config = rootRequire('/config');
-const version = rootRequire('/package.json').version;
-
+const { version } = rootRequire('/package.json');
 const { store, actions } = require('../reducers/index');
 const World = require('./containers/world');
 

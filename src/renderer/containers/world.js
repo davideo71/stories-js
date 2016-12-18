@@ -7,7 +7,6 @@ const { Vector3 } = THREE;
 const React3 = require('react-three-renderer');
 const { connect } = require('react-redux');
 
-
 const PLANE_WIDTH = 100;
 const PLANE_HEIGHT = 100;
 
