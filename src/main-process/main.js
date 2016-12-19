@@ -24,28 +24,6 @@ const createWindow = () => {
     // dereference the window object so it can be cleaned by gc
     mainWindow = null;
   });
-
-
-
-  // ===== TEST redux store
-  const unsubscribe = store.subscribe(() => {
-    console.log(`>>>M store changed: ${JSON.stringify(store.getState())}`);
-  });
-
-  // delay these dispatches a bit, so the renderer can catch them too
-  setTimeout(() => {
-    store.dispatch(actions.createNode({ name: 'ONE' }));
-    store.dispatch(actions.createNode({ name: 'TWO' }));
-    store.dispatch(actions.createNode({ name: 'THREE' }));
-    store.dispatch(actions.deleteNode(1));
-    store.dispatch(actions.updateNode(0, { size: [100, 100] }));
-  }, 3000);
-
-  unsubscribe();
-  // ===== /TEST
-
-
-
 };
 
 

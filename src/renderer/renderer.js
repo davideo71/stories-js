@@ -11,18 +11,41 @@ const World = require('./containers/world');
 console.info(`***** Stories ${version} (env mode: ${config.environment}) *****`);
 
 const mouseDownCB = (ev) => {
-  console.info(ev);
+  // console.info(ev);
 
   const color1 = 0xFF00FF;
   const color2 = 0x00FF00;
   const newColor = store.getState().canvas.backgroundColor === color1 ? color2 : color1;
   store.dispatch(actions.setBackgroundColor(newColor));
+
+  const { position: curPos, color: curColor } = store.getState().nodes.items[2];
+  store.dispatch(actions.updateNode(2, {
+    position: [curPos[0] + 1, curPos[1]],
+    color: curColor === color2 ? color1 : color2
+  }));
 };
 document.addEventListener('mousedown', mouseDownCB);
 
+
+
+// TEMP
+store.dispatch(actions.createNode({ name: 'ONE' }));
+store.dispatch(actions.createNode({ name: 'TWO' }));
+store.dispatch(actions.createNode({
+  name: 'THREE',
+  size: [80, 60],
+  imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg'
+}));
+store.dispatch(actions.deleteNode(1));
+store.dispatch(actions.updateNode(0, { size: [100, 100] }));
+// /TEMP
+
+
+
+// FIXME: something is going wrong with the Provider construction, so we pass it explicitly for now
 ReactDOM.render(
   <Provider store={store}>
-    <World />
+    <World store={store} />
   </Provider>,
   document.getElementById('canvasContainer')
 );

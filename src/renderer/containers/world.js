@@ -1,18 +1,19 @@
 const React = require('react');
 const { PropTypes } = React;
-
 const THREE = require('three');
 const { Vector3 } = THREE;
-
 const React3 = require('react-three-renderer');
 const { connect } = require('react-redux');
 
-const PLANE_WIDTH = 100;
-const PLANE_HEIGHT = 100;
+const Node = require('./nodes/node');  // TEMP
+
+// const PLANE_WIDTH = 100;
+// const PLANE_HEIGHT = 100;
 
 class World extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired,
+    store: PropTypes.object
 
     // onMouseDown: PropTypes.func,
     // onMouseUp: PropTypes.func
@@ -52,20 +53,11 @@ class World extends React.Component {
             position={new Vector3(0, 0, 70)}
             lookAt={new Vector3(0, 0, 0)}
           />
-          {/* add ambient light? */}
+
           {/* add canvas (which contains all nodes+lines and manages their life cycles) */}
 
-          {/* for now, let's just add a temporary box */}
-          <mesh>
-            <boxGeometry
-              width={40}
-              height={40}
-              depth={40}
-            />
-            <meshBasicMaterial
-              color={0x00ff00}
-            />
-          </mesh>
+          {/* temp node for testing purposes */}
+          <Node id={2} store={this.props.store} />
         </scene>
       </React3>
     </div>);

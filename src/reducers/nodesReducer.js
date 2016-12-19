@@ -11,13 +11,13 @@ const initialNodeState = {
   position: [0, 0],
   size: [1, 1],  // the size is useful because the aspect ratio is not always the same, but this can potentially be directly retrieved from the image it is linked to
   color: defaults.NODE.COLOR,
-  // imageFilename: '',
   // dimensionsFull: [0, 0],
   // dimensionsAspect: 1,
   // uploadStatus: false,
   // published: false,  // this bool indicates wether the image is currently selected and on display online
   // editingInfo: '',
-  // notes: ''
+  // notes: '',
+  imageName: null
 };
 
 const initialNodesState = {
