@@ -2,15 +2,15 @@
   "env": {
     "development": {
       "application/javascript": {
-        "presets": ["electron", "react"],
-        "plugins": ["transform-class-properties"],
+        "presets": ["electron", "react", "es2017"],
+        "plugins": ["transform-class-properties", "transform-runtime"],
         "sourceMaps": "inline"
       }
     },
     "production": {
       "application/javascript": {
-        "presets": ["electron", "react"],
-        "plugins": ["transform-class-properties"],
+        "presets": ["electron", "react", "es2017"],
+        "plugins": ["transform-class-properties", "transform-runtime"],
         "sourceMaps": false
       }
     }

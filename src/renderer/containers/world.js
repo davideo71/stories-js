@@ -13,8 +13,8 @@ const Node = require('./nodes/node');  // TEMP
 class World extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired,
-    store: PropTypes.object
-
+    store: PropTypes.object,
+    items: PropTypes.array
     // onMouseDown: PropTypes.func,
     // onMouseUp: PropTypes.func
   };
@@ -29,10 +29,13 @@ class World extends React.Component {
   render() {
     // NOTE: since this is a container (smart component), it gets its properties from the redux store, not from a parent;
     // this also means defaults are provided through the store (ultimately defaults.js) instead of defaultProps.
-    const { backgroundColor } = this.props;
+    const { backgroundColor, items } = this.props;
+    //const { items } = this.props;
 
     const width = window.innerWidth;
     const height = window.innerHeight;
+
+
 
     return (<div ref="container">
       <React3
@@ -57,7 +60,11 @@ class World extends React.Component {
           {/* add canvas (which contains all nodes+lines and manages their life cycles) */}
 
           {/* temp node for testing purposes */}
-          <Node id={2} store={this.props.store} />
+          {/* I should really make something here that cycles through all the node id's */}
+
+         {items.map((node)=>{console.log('the node id is ' + node.id),
+          <Node id={node.id} store={this.props.store} />
+        })}
         </scene>
       </React3>
     </div>);
@@ -66,7 +73,9 @@ class World extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    'backgroundColor': new THREE.Color(state.canvas.backgroundColor)
+    'backgroundColor': new THREE.Color(state.canvas.backgroundColor),
+    'items': Object.values(state.nodes.items)
+   // 'items': Object.keys(state.nodes.items).map(x=>state.nodes.items[x])
   };
 };
 

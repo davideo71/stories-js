@@ -25,8 +25,8 @@ const mouseDownCB = (ev) => {
  // }));
 };
 
-const keyDownCB = (daKey) => {
-  switch (daKey.code){
+const keyDownCB = (e) => {
+  switch (e.code){
   case 'ArrowUp':
     store.dispatch(actions.createNode({
       name: 'Four',
@@ -46,12 +46,15 @@ const keyDownCB = (daKey) => {
 };
 
 document.addEventListener('mousedown', mouseDownCB);
-document.addEventListener('keydown', function (e) { keyDownCB(e)});// eslint thinks it's ugly but i love all my children
-
+document.addEventListener('keydown', keyDownCB);
 
 
 // TEMP
-store.dispatch(actions.createNode({ name: 'ONE' }));
+store.dispatch(actions.createNode({
+  name: 'ONE',
+  size: [80, 60],
+  imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg'
+ }));
 store.dispatch(actions.createNode({ name: 'TWO' }));
 store.dispatch(actions.createNode({
   name: 'THREE',
