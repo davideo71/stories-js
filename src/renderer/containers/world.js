@@ -50,7 +50,7 @@ class World extends React.Component {
             near={1}
             far={5000}
             name="mainCamera"
-            position={new Vector3(0, 0, 70)}
+            position={new Vector3(0, 0, 200)}
             lookAt={new Vector3(0, 0, 0)}
           />
 

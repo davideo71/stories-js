@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const { Provider } = require('react-redux');
-
+const THREE = require('three');
 const rootRequire = require('app-root-path').require;
 const config = rootRequire('/config');
 const { version } = rootRequire('/package.json');
@@ -18,13 +18,35 @@ const mouseDownCB = (ev) => {
   const newColor = store.getState().canvas.backgroundColor === color1 ? color2 : color1;
   store.dispatch(actions.setBackgroundColor(newColor));
 
-  const { position: curPos, color: curColor } = store.getState().nodes.items[2];
-  store.dispatch(actions.updateNode(2, {
-    position: [curPos[0] + 1, curPos[1]],
-    color: curColor === color2 ? color1 : color2
-  }));
+ // const { position: curPos, color: curColor } = store.getState().nodes.items[2];
+ // store.dispatch(actions.updateNode(2, {
+ //   position: [curPos[0] + 1, curPos[1]],
+ //   color: curColor === color2 ? color1 : color2
+ // }));
 };
+
+const keyDownCB = (daKey) => {
+  switch (daKey.code){
+  case 'ArrowUp':
+    store.dispatch(actions.createNode({
+      name: 'Four',
+      size: [80, 60],
+      imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
+      position: new THREE.Vector3(-20, 30, 0.01)
+    }));
+    console.info('arrow up was pressed');
+    break;
+  case 'ArrowDown':
+    console.info('arrow down was pressed');
+    break;
+  default:
+    console.info('something else was pressed');
+    break;
+  };
+};
+
 document.addEventListener('mousedown', mouseDownCB);
+document.addEventListener('keydown', function (e) { keyDownCB(e)});// eslint thinks it's ugly but i love all my children
 
 
 
