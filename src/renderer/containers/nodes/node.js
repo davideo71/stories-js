@@ -41,6 +41,7 @@ class Node extends React.Component {
   // get id() { return this._id; }
 
   render() {
+    {console.log("y is " + this.props.position.y)}
     const imagePath = path.join(IMG_PATH, this.props.imageName);
     const w = this.props.size.x;
     const h = this.props.size.y;
@@ -63,7 +64,7 @@ class Node extends React.Component {
         <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
         <meshBasicMaterial resourceId="ringMat" color={this.props.color} />
       </resources>
-      <mesh position={new THREE.Vector3(0, 0, 0.01)}>
+      <mesh position= {new THREE.Vector3(0, 0, 0.01)}>
         <planeBufferGeometry name="imageGeom" width={w} height={h}></planeBufferGeometry>
         <materialResource resourceId="imageMat" />
       </mesh>
@@ -101,3 +102,4 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 module.exports = connect(mapStateToProps)(Node);
+

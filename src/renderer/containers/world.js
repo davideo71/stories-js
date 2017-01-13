@@ -62,8 +62,12 @@ class World extends React.Component {
           {/* temp node for testing purposes */}
           {/* I should really make something here that cycles through all the node id's */}
 
-         {items.map((node)=>{console.log('the node id is ' + node.id),
-          <Node id={node.id} store={this.props.store} />
+         {items.map((node)=>{console.log('the node id is ' + node.id);
+          return(<Node
+            id={node.id}
+            position = {node.position}
+            store={this.props.store}
+            />)
         })}
         </scene>
       </React3>
@@ -75,7 +79,7 @@ const mapStateToProps = (state) => {
   return {
     'backgroundColor': new THREE.Color(state.canvas.backgroundColor),
     'items': Object.values(state.nodes.items)
-   // 'items': Object.keys(state.nodes.items).map(x=>state.nodes.items[x])
+    //'items': Object.keys(state.nodes.items).map(x=>state.nodes.items[x])
   };
 };
 
