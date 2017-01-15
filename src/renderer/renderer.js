@@ -31,8 +31,8 @@ const keyDownCB = (e) => {
     store.dispatch(actions.createNode({
       name: 'new',
       size: [80, 60],
-      imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
-      position: new THREE.Vector3(-20, Math.floor(Math.random() * 100), 0.01)
+      imageName: 'villa.jpg',
+      position: new THREE.Vector3(Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), 0.01)
     }));
     console.info('arrow up was pressed');
     break;

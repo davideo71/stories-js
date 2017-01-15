@@ -18,7 +18,7 @@ const IMG_PATH = path.join(appRootPath, 'assets/img');
 
 // so the data in this node is a 'mere' reflection of actual data in the store;
 // should a node be recreated whenever data changes? or should it be updated?
-class Node extends React.Component {
+class Frame extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
@@ -45,30 +45,12 @@ class Node extends React.Component {
   render() {
     {console.log("y is " + this.props.position.y)}
     const imagePath = path.join(IMG_PATH, this.props.imageName);
-    const backGroundWhite = path.join(IMG_PATH, 'white.png');
     const w = this.props.size.x;
     const h = this.props.size.y;
     const frameMargin = 1 + FRAME_MARGIN;
 
     // TODO: (perhaps) share as many things under resources and share those among all nodes to save memory usage
     return (<group position={this.props.position}>
-      <resources>
-        {/* TODO: colors etc. should be moved to a theme file or something. Atm defaults.js appears to be fulfilling that function. */}
-        <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
-        <texture
-      resourceId="bgImageTex"
-          url={backGroundWhite}
-        />
-        <meshBasicMaterial resourceId="bgImageMat">
-          <textureResource resourceId="bgImageTex" />
-        </meshBasicMaterial>
-      </resources>
-{/*this is the backdround plane*/}
-      <mesh position= {new THREE.Vector3(0, 0, 0.00)}>
-        <planeBufferGeometry name="bgGeom" width={w * frameMargin} height={h * frameMargin}></planeBufferGeometry>
-        <materialResource resourceId="bgImageMat" />
-     </mesh>
-
       <resources>
         {/* TODO: colors etc. should be moved to a theme file or something. Atm defaults.js appears to be fulfilling that function. */}
         <texture
@@ -78,24 +60,25 @@ class Node extends React.Component {
             console.error(`could not load node image ('${imagePath}')`);
           }}
         />
-
-        {/*<meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />*/}
         <meshBasicMaterial resourceId="imageMat">
           <textureResource resourceId="imageTex" />
         </meshBasicMaterial>
+        <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
         <meshBasicMaterial resourceId="ringMat" color={this.props.color} />
-
       </resources>
-
       <mesh position= {new THREE.Vector3(0, 0, 0.00)}>
+        <planeBufferGeometry name="bgGeom" width={w * frameMargin} height={h * frameMargin}></planeBufferGeometry>
+        <materialResource resourceId="bgMat" />
+     </mesh>
+ {/*
+      <mesh position= {new THREE.Vector3(0, 0, 0.02)}>
         <planeBufferGeometry name="imageGeom" width={w} height={h}></planeBufferGeometry>
         <materialResource resourceId="imageMat" />
       </mesh>
-
-      <mesh
+       <mesh
         position={new THREE.Vector3(NODE_WIDTH * 0.5 + RING_RADIUS * 2, 0, 0)}
       >
-        {/* FIXME: should be ringBufferGeometry but that is currently unimplemented */}
+        --- FIXME: should be ringBufferGeometry but that is currently unimplemented ---
         <ringGeometry name="ringGeom"
           innerRadius={RING_RADIUS}
           outerRadius={RING_RADIUS + RING_THICKNESS}
@@ -103,7 +86,7 @@ class Node extends React.Component {
         >
         </ringGeometry>
         <materialResource resourceId="ringMat" />
-      </mesh>
+      </mesh>*/}
     </group>);
   }
 }
@@ -121,5 +104,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-module.exports = connect(mapStateToProps)(Node);
+module.exports = connect(mapStateToProps)(Frame);
 

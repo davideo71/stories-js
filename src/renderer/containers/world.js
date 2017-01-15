@@ -26,6 +26,8 @@ class World extends React.Component {
     // this._position = new THREE.Vector3(0, 0, 0);
   }
 
+
+
   render() {
     // NOTE: since this is a container (smart component), it gets its properties from the redux store, not from a parent;
     // this also means defaults are provided through the store (ultimately defaults.js) instead of defaultProps.
@@ -62,8 +64,9 @@ class World extends React.Component {
           {/* temp node for testing purposes */}
           {/* I should really make something here that cycles through all the node id's */}
 
-         {items.map((node)=>{console.log('the node id is ' + node.id);
+         {items.map((node) => {console.log('the node id is ' + node.id);
           return(<Node
+            key={node.id}
             id={node.id}
             position = {node.position}
             store={this.props.store}
