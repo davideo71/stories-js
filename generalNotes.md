@@ -3,7 +3,7 @@
 -----------------------------------
 What's in store? 
 
-  Store
+  -store
     canvas                      - object
         window/react3           - object
             width               - integer
