@@ -8,7 +8,7 @@ What's in store?
             canvas                      - object
                 window/react3           - object
                     width               - integer
-                    height               - integer
+                    height              - integer
                     antialias           - Boolean
                     pixelratio          - float
                     maincamera          - string?
