@@ -5,7 +5,7 @@ const THREE = require('three');
 const rootRequire = require('app-root-path').require;
 const config = rootRequire('/config');
 const { version } = rootRequire('/package.json');
-const { store, actions } = require('../reducers/index');
+const { store, actions } = require('../reducers/');
 const World = require('./containers/world');
 
 console.info(`***** Stories ${version} (env mode: ${config.environment}) *****`);
@@ -70,6 +70,7 @@ store.dispatch(actions.updateNode(0, { size: [100, 100] }));
 
 
 // FIXME: something is going wrong with the Provider construction, so we pass it explicitly for now
+//        could it be related to this? https://github.com/toxicFork/react-three-renderer/issues/61
 ReactDOM.render(
   <Provider store={store}>
     <World store={store} />

@@ -10,10 +10,10 @@ const actions = {
   setBackgroundColor: (color) => {
     return { type: actionTypes.SET_BACKGROUND_COLOR, payload: color };
   },
-  createNode: (props) => {
+  createNode: (fields) => {
     return (dispatch, getState) => {
       const id = getState().nodes.nextId;
-      dispatch({ type: actionTypes.NODE_CREATE, payload: Object.assign({}, props, { id }) });
+      dispatch({ type: actionTypes.NODE_CREATE, payload: Object.assign({}, fields, { id }) });
       dispatch({ type: actionTypes.NODE_SET_NEXT_ID, payload: id + 1 });
     };
   },

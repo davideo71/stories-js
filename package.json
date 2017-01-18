@@ -20,7 +20,6 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2017": "^6.16.0",
     "is-electron-renderer": "^2.0.1",
-    "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-redux": "^5.0.1",
     "react-three-renderer": "^3.0.0",
@@ -39,5 +38,8 @@
     "eslint": "^3.4",
     "eslint-plugin-react": "^6.8.0",
     "redux-immutable-state-invariant": "^1.2.4"
+  },
+  "peerDependencies": {
+    "react": "^15.4.0"
   }
 }
