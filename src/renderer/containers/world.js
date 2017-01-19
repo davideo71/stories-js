@@ -5,16 +5,16 @@ const { Vector3 } = THREE;
 const React3 = require('react-three-renderer');
 const { connect } = require('react-redux');
 
-const Node = require('./nodes/node');  // TEMP
+const Canvas = require('./canvas');
 
 // const PLANE_WIDTH = 100;
 // const PLANE_HEIGHT = 100;
 
 class World extends React.Component {
   static propTypes = {
-    backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired,
     store: PropTypes.object,
-    items: PropTypes.array
+    backgroundColor: PropTypes.instanceOf(THREE.Color).isRequired
+
     // onMouseDown: PropTypes.func,
     // onMouseUp: PropTypes.func
   };
@@ -28,16 +28,14 @@ class World extends React.Component {
 
 
 
+  /*
+   * NOTE: since this is a container (smart component), it gets its properties from the redux store, not from a parent;
+   * this also means defaults are provided through the store (ultimately defaults.js) instead of defaultProps.
+   */
   render() {
-    // NOTE: since this is a container (smart component), it gets its properties from the redux store, not from a parent;
-    // this also means defaults are provided through the store (ultimately defaults.js) instead of defaultProps.
-    const { backgroundColor, items } = this.props;
-    //const { items } = this.props;
-
+    const { backgroundColor } = this.props;
     const width = window.innerWidth;
     const height = window.innerHeight;
-
-
 
     return (<div ref="container">
       <React3
@@ -59,19 +57,7 @@ class World extends React.Component {
             lookAt={new Vector3(0, 0, 0)}
           />
 
-          {/* add canvas (which contains all nodes+lines and manages their life cycles) */}
-
-          {/* temp node for testing purposes */}
-          {/* I should really make something here that cycles through all the node id's */}
-
-         {items.map((node) => {console.log('the node id is ' + node.id);
-          return(<Node
-            key={node.id}
-            id={node.id}
-            position = {node.position}
-            store={this.props.store}
-            />)
-        })}
+          <Canvas store={this.props.store} />
         </scene>
       </React3>
     </div>);
@@ -80,9 +66,7 @@ class World extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    'backgroundColor': new THREE.Color(state.canvas.backgroundColor),
-    'items': Object.values(state.nodes.items)
-    //'items': Object.keys(state.nodes.items).map(x=>state.nodes.items[x])
+    'backgroundColor': new THREE.Color(state.canvas.backgroundColor)
   };
 };
 

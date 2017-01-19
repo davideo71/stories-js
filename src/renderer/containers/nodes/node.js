@@ -43,9 +43,8 @@ class Node extends React.Component {
   // get id() { return this._id; }
 
   render() {
-    {console.log("y is " + this.props.position.y)}
+    const bgImagePath = path.join(IMG_PATH, 'white.png');
     const imagePath = path.join(IMG_PATH, this.props.imageName);
-    const backGroundWhite = path.join(IMG_PATH, 'white.png');
     const w = this.props.size.x;
     const h = this.props.size.y;
     const frameMargin = 1 + FRAME_MARGIN;
@@ -56,15 +55,19 @@ class Node extends React.Component {
         {/* TODO: colors etc. should be moved to a theme file or something. Atm defaults.js appears to be fulfilling that function. */}
         <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
         <texture
-      resourceId="bgImageTex"
-          url={backGroundWhite}
+          resourceId="bgImageTex"
+          url={bgImagePath}
+          onError={() => {
+            console.error(`could not load background image ('${bgImagePath}')`);
+          }}
         />
         <meshBasicMaterial resourceId="bgImageMat">
           <textureResource resourceId="bgImageTex" />
         </meshBasicMaterial>
       </resources>
-{/*this is the backdround plane*/}
-      <mesh position= {new THREE.Vector3(0, 0, 0.00)}>
+
+      {/* this is the background plane */}
+      <mesh position= {new THREE.Vector3(0, 0, 0)}>
         <planeBufferGeometry name="bgGeom" width={w * frameMargin} height={h * frameMargin}></planeBufferGeometry>
         <materialResource resourceId="bgImageMat" />
      </mesh>
@@ -79,7 +82,7 @@ class Node extends React.Component {
           }}
         />
 
-        {/*<meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />*/}
+        {/* <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} /> */}
         <meshBasicMaterial resourceId="imageMat">
           <textureResource resourceId="imageTex" />
         </meshBasicMaterial>
@@ -87,7 +90,7 @@ class Node extends React.Component {
 
       </resources>
 
-      <mesh position= {new THREE.Vector3(0, 0, 0.00)}>
+      <mesh position= {new THREE.Vector3(0, 0, 0)}>
         <planeBufferGeometry name="imageGeom" width={w} height={h}></planeBufferGeometry>
         <materialResource resourceId="imageMat" />
       </mesh>
@@ -95,7 +98,7 @@ class Node extends React.Component {
       <mesh
         position={new THREE.Vector3(NODE_WIDTH * 0.5 + RING_RADIUS * 2, 0, 0)}
       >
-        {/* FIXME: should be ringBufferGeometry but that is currently unimplemented */}
+        {/* FIXME: should be ringBufferGeometry but that is currently unimplemented (see: https://github.com/toxicFork/react-three-renderer/issues/2#issuecomment-250013560) */}
         <ringGeometry name="ringGeom"
           innerRadius={RING_RADIUS}
           outerRadius={RING_RADIUS + RING_THICKNESS}
