@@ -117,7 +117,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     name: node.name,
-    position: new THREE.Vector3(node.position.x, node.position.y, 0),
+    position: new THREE.Vector3(node.position[0], node.position[1], 0),
     size: new THREE.Vector2(node.size[0], node.size[1]),
     color: new THREE.Color(node.color),
     imageName: node.imageName

@@ -32,7 +32,7 @@ const keyDownCB = (e) => {
       name: 'new',
       size: [80, 60],
       imageName: 'villa.jpg',
-      position: new THREE.Vector3(Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), 0.01)
+      position: [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), 0.01]
     }));
     console.info('arrow up was pressed');
     break;
@@ -54,14 +54,14 @@ store.dispatch(actions.createNode({
   name: 'ONE',
   size: [80, 60],
   imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
-  position: new THREE.Vector3(-20, Math.floor(Math.random() * 100), 0.01)
+  position: [-20, Math.floor(Math.random() * 100), 0.01]
  }));
 store.dispatch(actions.createNode({ name: 'TWO' }));
 store.dispatch(actions.createNode({
   name: 'THREE',
   size: [80, 60],
   imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
-  position: new THREE.Vector3(-20, Math.floor(Math.random() * 100), 0.01)
+  position: [-20, Math.floor(Math.random() * 100), 0.01]
 }));
 store.dispatch(actions.deleteNode(1));
 store.dispatch(actions.updateNode(0, { size: [100, 100] }));
