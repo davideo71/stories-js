@@ -63,8 +63,12 @@ store.dispatch(actions.createNode({
   imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
   position: [-20, Math.floor(Math.random() * 100), 0.01]
 }));
-store.dispatch(actions.deleteNode(1));
+//store.dispatch(actions.deleteNode(1));
 store.dispatch(actions.updateNode(0, { size: [100, 100] }));
+store.dispatch(actions.createLine({
+  startNode: 1,
+  endNode: 2
+}));
 // /TEMP
 
 

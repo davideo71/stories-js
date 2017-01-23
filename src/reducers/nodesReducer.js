@@ -17,7 +17,7 @@ const initialNodeState = {
   // published: false,  // this bool indicates wether the image is currently selected and on display online
   // editingInfo: '',
   // notes: '',
-  imageName: null
+  imageName: ''   //This was null before but that gave me a bug
 };
 
 const initialNodesState = {

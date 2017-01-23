@@ -3,7 +3,10 @@ const actionTypes = {
   NODE_CREATE: 'NODE_CREATE',
   NODE_DELETE: 'NODE_DELETE',
   NODE_UPDATE: 'NODE_UPDATE',
-  NODE_SET_NEXT_ID: 'NODE_SET_NEXT_ID'
+  NODE_SET_NEXT_ID: 'NODE_SET_NEXT_ID',
+  LINE_CREATE: 'LINE_CREATE',
+  LINE_DELETE: 'LINE_DELETE',
+  LINE_SET_NEXT_ID: 'LINE_SET_NEXT_ID'
 };
 
 const actions = {
@@ -22,6 +25,16 @@ const actions = {
   },
   updateNode: (id, props) => {
     return { type: actionTypes.NODE_UPDATE, payload: Object.assign({}, { id }, props) };
+  },
+  createLine: (fields) =>{
+    return (dispatch, getState) => {
+      const id = getState().lines.nextId;
+      dispatch({ type: actionTypes.LINE_CREATE, payload: Object.assign({}, fields, { id }) });
+      dispatch({ type: actionTypes.LINE_SET_NEXT_ID, payload: id + 1 });
+    };
+  },
+  deleteLine: (id) => {
+    return { type: actionTypes.LINE_DELETE, payload: id };
   }
 };
 

@@ -6,10 +6,12 @@ const isRenderer = require('is-electron-renderer');
 const config = require('app-root-path').require('/config');
 const canvasReducer = require('./canvasReducer');
 const nodesReducer = require('./nodesReducer');
+const linesReducer = require('./linesReducer');
 
 const rootReducer = combineReducers({
   canvas: canvasReducer,
-  nodes: nodesReducer
+  nodes: nodesReducer,
+  lines: linesReducer
 });
 
 const middleware = [thunk];
