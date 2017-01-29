@@ -57,7 +57,6 @@ class Node extends React.Component {
     return (<group position={this.props.position}>
       <resources>
         {/* TODO: colors etc. should be moved to a theme file or something. Atm defaults.js appears to be fulfilling that function. */}
-        <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
         <texture
           resourceId="bgImageTex"
           url={bgImagePath}
@@ -65,19 +64,6 @@ class Node extends React.Component {
             console.error(`could not load background image ('${bgImagePath}')`);
           }}
         />
-        <meshBasicMaterial resourceId="bgImageMat">
-          <textureResource resourceId="bgImageTex" />
-        </meshBasicMaterial>
-      </resources>
-
-      {/* this is the background plane */}
-      <mesh position= {new THREE.Vector3(0, 0, 0)}>
-        <planeBufferGeometry name="bgGeom" width={w * frameMargin} height={h * frameMargin}></planeBufferGeometry>
-        <materialResource resourceId="bgImageMat" />
-     </mesh>
-
-      <resources>
-        {/* TODO: colors etc. should be moved to a theme file or something. Atm defaults.js appears to be fulfilling that function. */}
         <texture
           resourceId="imageTex"
           url={imagePath}
@@ -86,12 +72,21 @@ class Node extends React.Component {
           }}
         />
 
-        {/* <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} /> */}
-
-        <meshBasicMaterial resourceId="imageMat">
+        <meshBasicMaterial resourceId="bgMat" color={0xFFFFFF} />
+        <meshBasicMaterial resourceId="bgImageMat" color={0xF0F0F0} depthTest={false} depthWrite={false}>
+          {/* <textureResource resourceId="bgImageTex" /> */}
+        </meshBasicMaterial>
+        <meshBasicMaterial resourceId="imageMat" color={0x00FFFF} depthTest={false} depthWrite={false}>
           <textureResource resourceId="imageTex" />
         </meshBasicMaterial>
+        <meshBasicMaterial resourceId="ringMat" color={this.props.color} depthTest={false} depthWrite={false} />
       </resources>
+
+      {/* this is the background plane */}
+      <mesh position= {new THREE.Vector3(0, 0, 0)}>
+        <planeBufferGeometry name="bgGeom" width={w * frameMargin} height={h * frameMargin}></planeBufferGeometry>
+        <materialResource resourceId="bgImageMat" />
+     </mesh>
 
       <mesh position= {new THREE.Vector3(0, 0, 0)}>
         <planeBufferGeometry name="imageGeom" width={w} height={h}></planeBufferGeometry>
