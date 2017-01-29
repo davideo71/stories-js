@@ -22,7 +22,7 @@
     "is-electron-renderer": "^2.0.1",
     "react-dom": "^15.4.0",
     "react-redux": "^5.0.1",
-    "react-three-renderer": "^3.0.0",
+    "react-three-renderer": "^3.0.2",
     "redux": "^3.6.0",
     "redux-electron-store": "^0.4.1",
     "redux-logger": "^2.7.4",

@@ -6,7 +6,6 @@ const Node = require('./nodes/node');
 
 class Canvas extends React.Component {
   static propTypes = {
-    store: PropTypes.object,
     nodes: PropTypes.array.isRequired
   }
 
@@ -27,7 +26,6 @@ class Canvas extends React.Component {
           key={node.id}
           id={node.id}
           position={node.position}
-          store={this.props.store}
         />);
       })}
       </group>);

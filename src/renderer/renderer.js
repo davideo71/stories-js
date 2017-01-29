@@ -1,7 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const { Provider } = require('react-redux');
-const THREE = require('three');
 const rootRequire = require('app-root-path').require;
 const config = rootRequire('/config');
 const { version } = rootRequire('/package.json');
@@ -56,7 +54,7 @@ store.dispatch(actions.createNode({
   imageName: '758px-Canestra_di_frutta_(Caravaggio).jpg',
   position: [-20, Math.floor(Math.random() * 100), 0.01]
  }));
-store.dispatch(actions.createNode({ name: 'TWO' }));
+// store.dispatch(actions.createNode({ name: 'TWO' }));
 store.dispatch(actions.createNode({
   name: 'THREE',
   size: [80, 60],
@@ -73,11 +71,10 @@ store.dispatch(actions.createLine({
 
 
 
-// FIXME: something is going wrong with the Provider construction, so we pass it explicitly for now
-//        could it be related to this? https://github.com/toxicFork/react-three-renderer/issues/61
+// FIXME: normally we'd use a <Provider> here to pass the store along but this does
+//   not work with R3R yet (see: https://github.com/toxicFork/react-three-renderer/issues/140);
+//   therefore the provider is currently placed directly within the <React3> component.
 ReactDOM.render(
-  <Provider store={store}>
-    <World store={store} />
-  </Provider>,
+  <World store={store} />,
   document.getElementById('canvasContainer')
 );

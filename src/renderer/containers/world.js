@@ -3,7 +3,7 @@ const { PropTypes } = React;
 const THREE = require('three');
 const { Vector3 } = THREE;
 const React3 = require('react-three-renderer');
-const { connect } = require('react-redux');
+const { connect, Provider } = require('react-redux');
 
 const Canvas = require('./canvas');
 
@@ -39,13 +39,13 @@ class World extends React.Component {
 
     return (<div ref="container">
       <React3
-        width={width}
-        height={height}
-        antialias
-        pixelRatio={window.devicePixelRatio}
-        mainCamera="mainCamera"
-        clearColor={backgroundColor}
-      >
+          width={width}
+          height={height}
+          antialias
+          pixelRatio={window.devicePixelRatio}
+          mainCamera="mainCamera"
+          clearColor={backgroundColor}
+      ><Provider store={this.props.store}>
         <scene ref="world">
           <perspectiveCamera
             fov={70}
@@ -57,9 +57,9 @@ class World extends React.Component {
             lookAt={new Vector3(0, 0, 0)}
           />
 
-          <Canvas store={this.props.store} />
+          <Canvas />
         </scene>
-      </React3>
+      </Provider></React3>
     </div>);
   }
 }
